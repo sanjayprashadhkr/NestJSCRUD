@@ -24,13 +24,20 @@ export class TasksService {
         this.tasks.push(task);
         return task;
     }
-    deleteTask(id: string): string {
-        const index = this.tasks.findIndex(task => task.id === id);
-        if (index === -1) {
-            return "Task not found";
-        }
-        this.tasks.splice(index, 1);
-        return "Task deleted successfully";
+    getTaskById(id:string):Task
+    {
+        return this.tasks.find((task)=>task.id===id);
+    }
+    deleteTaskById(id:string):string
+    {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+        return "Deleted Successfully";
+    }
+    updateStatusById(id:string , status:TaskStatus):Task
+    {
+        const task =this.getTaskById(id);
+        task.status=status;
+        return task;
     }
  
 }
